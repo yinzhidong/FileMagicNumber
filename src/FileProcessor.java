@@ -36,6 +36,7 @@ public class FileProcessor {
         }
         if (hasExtention) {
             fileFormat = readFilesMagicNumber();
+            if (fileFormat != null)
             System.out.println(String.format("Your file %s is safe, extention is correct!", fileFormat.getName()));
         }
     }
