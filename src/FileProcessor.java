@@ -12,7 +12,6 @@ public class FileProcessor {
     private SingleFormat fileFormat = null;
     boolean hasExtention;
 
-
     public  FileProcessor() {
         formats.add(new SingleFormat("jpg", new String[]{"FF","D8","FF","E0","00","10","4A","46","49","46","00","01"} , 0));
         formats.add(new SingleFormat("jpg", new String[]{"FF", "D8", "FF", "DB"} , 0));
@@ -20,27 +19,27 @@ public class FileProcessor {
         formats.add(new SingleFormat("jpg", new String[]{"FF", "D8", "FF", "E1"} , 0));
         formats.add(new SingleFormat("gif", new String[]{"47", "49", "46", "38", "37", "61"} , 0));
         formats.add(new SingleFormat("gif", new String[]{"47", "49", "46", "38", "39", "61"} , 0));
-        formats.add(new SingleFormat("txt", new String[]{""} , 0));
+        formats.add(new SingleFormat("txt", new String[]{"EF", "BB", "BF"} , 0));
     }
-
 
     public void processFile() {
-        System.out.println("write path to your file: ");
-        scanner = new Scanner(System.in);
-        file = new File(scanner.nextLine());
+        boolean again = true;
 
-        try {
-            hasExtention = confirmFileHasExtention(file);
-        } catch (ExtentionNotHandledException e) {
-            e.printStackTrace();
-        }
-        if (hasExtention) {
-            fileFormat = readFilesMagicNumber();
-            if (fileFormat != null)
-            System.out.println(String.format("Your file %s is safe, extention is correct!", fileFormat.getName()));
-        }
+            System.out.println("write path to your file: ");
+            scanner = new Scanner(System.in);
+            file = new File(scanner.nextLine());
+
+            try {
+                hasExtention = confirmFileHasExtention(file);
+            } catch (ExtentionNotHandledException e) {
+                e.printStackTrace();
+            }
+            if (hasExtention) {
+                fileFormat = readFilesMagicNumber();
+                if (fileFormat != null)
+                    System.out.println(String.format("Your file %s is safe, extention is correct!", fileFormat.getName()));
+            }
     }
-
 
     public boolean confirmFileHasExtention(File file) throws ExtentionNotHandledException {
         for ( SingleFormat format : formats) {
@@ -52,8 +51,8 @@ public class FileProcessor {
 
     public SingleFormat readFilesMagicNumber() {
         for (SingleFormat format : formats) {
-            if (format.getName() == "txt")
-                return format;
+//            if (format.getName() == "txt")
+//                return format;
             if (file.getName().endsWith(format.getName())) {
                 int read = 0;
                 String [] formatMagicByte = format.getMagicNumber();
@@ -76,6 +75,4 @@ public class FileProcessor {
         }
         return null;
     }
-
-
 }
