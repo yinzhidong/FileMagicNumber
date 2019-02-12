@@ -63,8 +63,10 @@ public class FileProcessor {
                         if (Integer.toHexString(read).length() == 1)
                             inputMagicByte = "0".concat(Integer.toHexString(read).toUpperCase());
                         else inputMagicByte = Integer.toHexString(read).toUpperCase();
-                        if (!inputMagicByte.equals(formatMagicByte[i]))
+                        if (!inputMagicByte.equals(formatMagicByte[i])) {
+                            System.out.println("wrong extention!");
                             break;
+                        }
                         if (i ==formatMagicByte.length - 1)
                             return format;
                     }
