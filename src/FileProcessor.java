@@ -41,7 +41,7 @@ public class FileProcessor {
             }
     }
 
-    public boolean confirmFileHasExtention(File file) throws ExtentionNotHandledException {
+    private boolean confirmFileHasExtention(File file) throws ExtentionNotHandledException {
         for ( SingleFormat format : formats) {
             if (file.getName().endsWith(format.getName()))
                 return true;
@@ -49,7 +49,7 @@ public class FileProcessor {
         throw new ExtentionNotHandledException("Extention not handled");
     }
 
-    public SingleFormat readFilesMagicNumber() {
+    private SingleFormat readFilesMagicNumber() {
         for (SingleFormat format : formats) {
 //            if (format.getName() == "txt")
 //                return format;
