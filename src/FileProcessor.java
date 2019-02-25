@@ -6,10 +6,10 @@ import java.util.Scanner;
 public class FileProcessor {
 
     private List<SingleFormat> formats = new ArrayList<>();
-    private File file = null;
-    private Scanner scanner = null;
-    private String inputMagicByte = null;
-    private SingleFormat fileFormat = null;
+    private File file;
+    private Scanner scanner;
+    private String inputMagicByte;
+    private SingleFormat fileFormat;
     boolean hasExtention;
 
     public  FileProcessor() {
